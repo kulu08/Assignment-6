@@ -196,6 +196,35 @@ function updateStudent(studentData) {
     });
 }
 
+// Function to delete a student by their number
+function deleteStudentByNum(studentNum) {
+    return new Promise((resolve, reject) => {
+        Student.destroy({ // Remove student record
+            where: {
+                studentNum: studentNum
+            }
+        })
+        .then(() => resolve())
+        .catch((err) => reject("Unable to delete student / Student not found"));
+    });
+}
+
+
+// Function to delete a course by its ID
+function deleteCourseById(id) {
+    return new Promise((resolve, reject) => {
+        Course.destroy({ // Remove course record
+            where: { courseId: id }
+        })
+            .then(() => {
+                resolve();
+            })
+            .catch(err => {
+                reject("unable to delete course");
+            });
+    });
+}
+
 // Function to add a new course to the database
 function addCourse(courseData) {
     return new Promise((resolve, reject) => {
@@ -235,34 +264,6 @@ function updateCourse(courseData) {
             .catch(err => {
                 reject("unable to update course");
             });
-    });
-}
-
-// Function to delete a course by its ID
-function deleteCourseById(id) {
-    return new Promise((resolve, reject) => {
-        Course.destroy({ // Remove course record
-            where: { courseId: id }
-        })
-            .then(() => {
-                resolve();
-            })
-            .catch(err => {
-                reject("unable to delete course");
-            });
-    });
-}
-
-// Function to delete a student by their number
-function deleteStudentByNum(studentNum) {
-    return new Promise((resolve, reject) => {
-        Student.destroy({ // Remove student record
-            where: {
-                studentNum: studentNum
-            }
-        })
-        .then(() => resolve())
-        .catch((err) => reject("Unable to delete student / Student not found"));
     });
 }
 
