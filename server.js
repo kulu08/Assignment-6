@@ -5,7 +5,7 @@
 *  of this assignment has been copied manually or electronically from any other source 
 *  (including 3rd party web sites) or distributed to other students.
 * 
-* Name:Kulpreet Singh Student ID:160902235  Date: 11 August 2024
+* Name:Kulpreet Singh Student  ID:160902235  Date: 11 August 2024
 *
 *  Online (vercel) Link: 
 *
@@ -90,63 +90,6 @@ app.use(function(req, res, next) {
 
 // Add body-parser middleware to handle form data
 app.use(express.urlencoded({ extended: true }));
-
-
-
-// POST /student/update - Handle updating student details
-app.post("/student/update", (req, res) => {
-    collegeData.updateStudent(req.body)
-        .then(() => {
-            res.redirect("/students");
-        })
-        .catch(err => {
-            res.status(500).send("Unable to update student");
-        });
-});
-
-
-// 404 Error - Handle requests to undefined routes
-app.use((req, res) => {
-    res.status(404).sendFile(path.join(__dirname, "/views/404.html"));
-});
-
-// Initialize and start the server
-collegeData.initialize()
-    .then(() => {
-        app.listen(HTTP_PORT, () => {
-            console.log("server listening on port: " + HTTP_PORT);
-        });
-    })
-    .catch((err) => {
-        console.log("Unable to start server: " + err);
-    });
-
-// GET /courses/add - Render the form to add a new course
-app.get("/courses/add", (req, res) => {
-    res.render("addCourse");
-});
-
-// POST /courses/add - Handle adding a new course
-app.post("/courses/add", (req, res) => {
-    collegeData.addCourse(req.body)
-        .then(() => {
-            res.redirect("/courses");
-        })
-        .catch(err => {
-            res.status(500).send("Unable to add course");
-        });
-});
-
-// POST /course/update - Handle updating course details
-app.post("/course/update", (req, res) => {
-    collegeData.updateCourse(req.body)
-        .then(() => {
-            res.redirect("/courses");
-        })
-        .catch(err => {
-            res.status(500).send("Unable to update course");
-        });
-});
 
 // Define routes
 
@@ -281,6 +224,44 @@ app.get("/student/:studentNum", (req, res) => {
         });
 });
 
+// POST /student/update - Handle updating student details
+app.post("/student/update", (req, res) => {
+    collegeData.updateStudent(req.body)
+        .then(() => {
+            res.redirect("/students");
+        })
+        .catch(err => {
+            res.status(500).send("Unable to update student");
+        });
+});
+
+// GET /courses/add - Render the form to add a new course
+app.get("/courses/add", (req, res) => {
+    res.render("addCourse");
+});
+
+// POST /courses/add - Handle adding a new course
+app.post("/courses/add", (req, res) => {
+    collegeData.addCourse(req.body)
+        .then(() => {
+            res.redirect("/courses");
+        })
+        .catch(err => {
+            res.status(500).send("Unable to add course");
+        });
+});
+
+// POST /course/update - Handle updating course details
+app.post("/course/update", (req, res) => {
+    collegeData.updateCourse(req.body)
+        .then(() => {
+            res.redirect("/courses");
+        })
+        .catch(err => {
+            res.status(500).send("Unable to update course");
+        });
+});
+
 // GET /course/delete/:id - Handle deleting a specific course
 app.get("/course/delete/:id", (req, res) => {
     collegeData.deleteCourseById(req.params.id)
@@ -302,6 +283,22 @@ app.get("/student/delete/:studentNum", (req, res) => {
             res.status(500).send("Unable to Remove Student / Student not found");
         });
 });
+
+// 404 Error - Handle requests to undefined routes
+app.use((req, res) => {
+    res.status(404).sendFile(path.join(__dirname, "/views/404.html"));
+});
+
+// Initialize and start the server
+collegeData.initialize()
+    .then(() => {
+        app.listen(HTTP_PORT, () => {
+            console.log("server listening on port: " + HTTP_PORT);
+        });
+    })
+    .catch((err) => {
+        console.log("Unable to start server: " + err);
+    });
 
 // Export the app for testing or other purposes
 module.exports = app;
