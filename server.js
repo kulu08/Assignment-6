@@ -7,18 +7,18 @@
 * 
 * Name:Kulpreet Singh Student  ID:160902235  Date: 11 August 2024
 *
-*  Online (vercel) Link: 
+*  Online (vercel) Link: https://assignment-6-lemon.vercel.app/
 *
 ********************************************************************************/ 
 // Define the port to listen on (default to 8080 if not set)
+// Set the port to listen on
 var HTTP_PORT = process.env.PORT || 8080;
 
 // Import required modules
 var express = require("express");
 var exphbs = require('express-handlebars');
 var path = require("path");
-const { initialize } = require("./modules/collegeData");
-var collegeData = require("./modules/collegeData");
+const collegeData = require("./modules/collegeData");
 
 // Create an Express application
 var app = express();
@@ -297,8 +297,5 @@ collegeData.initialize()
         });
     })
     .catch((err) => {
-        console.log("Unable to start server: " + err);
+        console.log("unable to start server: " + err);
     });
-
-// Export the app for testing or other purposes
-module.exports = app;

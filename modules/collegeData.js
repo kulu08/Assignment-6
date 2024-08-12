@@ -1,5 +1,4 @@
 // Import required modules
-require('pg');
 const Sequelize = require('sequelize');
 
 // Initialize Sequelize with PostgreSQL connection details
@@ -63,7 +62,7 @@ Student.belongsTo(Course, { foreignKey: 'course' });
 // Function to initialize the database connection and synchronize models
 function initialize() {
     return new Promise((resolve, reject) => {
-        sequelize.sync() // Synchronize all defined models with the database
+        sequelize.sync()
             .then(() => {
                 resolve();
             })
@@ -76,7 +75,7 @@ function initialize() {
 // Function to retrieve all students from the database
 function getAllStudents() {
     return new Promise((resolve, reject) => {
-        Student.findAll() // Fetch all students
+        Student.findAll()
             .then(data => {
                 resolve(data);
             })
@@ -89,7 +88,7 @@ function getAllStudents() {
 // Function to retrieve all courses from the database
 function getCourses() {
     return new Promise((resolve, reject) => {
-        Course.findAll() // Fetch all courses
+        Course.findAll()
             .then(data => {
                 resolve(data);
             })
@@ -102,7 +101,7 @@ function getCourses() {
 // Function to retrieve students by their course ID
 function getStudentsByCourse(course) {
     return new Promise((resolve, reject) => {
-        Student.findAll({ where: { course: course } }) // Fetch students by course ID
+        Student.findAll({ where: { course: course } })
             .then(data => {
                 if (data.length > 0) {
                     resolve(data);
@@ -119,7 +118,7 @@ function getStudentsByCourse(course) {
 // Function to retrieve a student by their student number
 function getStudentByNum(num) {
     return new Promise((resolve, reject) => {
-        Student.findOne({ where: { studentNum: num } }) // Fetch student by student number
+        Student.findOne({ where: { studentNum: num } })
             .then(data => {
                 if (data) {
                     resolve(data);
@@ -136,16 +135,15 @@ function getStudentByNum(num) {
 // Function to add a new student to the database
 function addStudent(studentData) {
     return new Promise((resolve, reject) => {
-        studentData.TA = (studentData.TA) ? true : false; // Ensure TA is a boolean
+        studentData.TA = (studentData.TA) ? true : false;
         
-        // Replace blank values with null
         for (let prop in studentData) {
             if (studentData[prop] === "") {
                 studentData[prop] = null;
             }
         }
 
-        Student.create(studentData) // Create a new student record
+        Student.create(studentData)
             .then(() => {
                 resolve();
             })
@@ -158,7 +156,7 @@ function addStudent(studentData) {
 // Function to retrieve a course by its ID
 function getCourseById(id) {
     return new Promise((resolve, reject) => {
-        Course.findOne({ where: { courseId: id } }) // Fetch course by ID
+        Course.findOne({ where: { courseId: id } })
             .then(data => {
                 if (data) {
                     resolve(data);
@@ -175,16 +173,15 @@ function getCourseById(id) {
 // Function to update a student's details
 function updateStudent(studentData) {
     return new Promise((resolve, reject) => {
-        studentData.TA = (studentData.TA) ? true : false; // Ensure TA is a boolean
+        studentData.TA = (studentData.TA) ? true : false;
 
-        // Replace blank values with null
         for (let prop in studentData) {
             if (studentData[prop] === "") {
                 studentData[prop] = null;
             }
         }
 
-        Student.update(studentData, { // Update student record
+        Student.update(studentData, {
             where: { studentNum: studentData.studentNum }
         })
             .then(() => {
@@ -199,7 +196,7 @@ function updateStudent(studentData) {
 // Function to delete a student by their number
 function deleteStudentByNum(studentNum) {
     return new Promise((resolve, reject) => {
-        Student.destroy({ // Remove student record
+        Student.destroy({
             where: {
                 studentNum: studentNum
             }
@@ -209,11 +206,10 @@ function deleteStudentByNum(studentNum) {
     });
 }
 
-
 // Function to delete a course by its ID
 function deleteCourseById(id) {
     return new Promise((resolve, reject) => {
-        Course.destroy({ // Remove course record
+        Course.destroy({
             where: { courseId: id }
         })
             .then(() => {
@@ -228,14 +224,13 @@ function deleteCourseById(id) {
 // Function to add a new course to the database
 function addCourse(courseData) {
     return new Promise((resolve, reject) => {
-        // Replace blank values with null
         for (let prop in courseData) {
             if (courseData[prop] === "") {
                 courseData[prop] = null;
             }
         }
 
-        Course.create(courseData) // Create a new course record
+        Course.create(courseData)
             .then(() => {
                 resolve();
             })
@@ -248,14 +243,13 @@ function addCourse(courseData) {
 // Function to update a course's details
 function updateCourse(courseData) {
     return new Promise((resolve, reject) => {
-        // Replace blank values with null
         for (let prop in courseData) {
             if (courseData[prop] === "") {
                 courseData[prop] = null;
             }
         }
 
-        Course.update(courseData, { // Update course record
+        Course.update(courseData, {
             where: { courseId: courseData.courseId }
         })
             .then(() => {
