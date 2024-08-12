@@ -1,0 +1,115 @@
+<div class="container">
+    <div class="row">
+        <main class="col-md-12">
+            <!-- Form to add a new student -->
+            <form method="POST" action="/students/add">
+                <!-- Fieldset for Personal Information -->
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    <div class="row">
+                        <!-- First Name Input -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>First Name:</label>
+                                <input class="form-control" name="firstName" type="text" />
+                            </div>
+                        </div>
+                        <!-- Last Name Input -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Last Name:</label>
+                                <input class="form-control" name="lastName" type="text"  />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Email Input -->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input class="form-control" name="email" type="email" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Address Street Input -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Address (Street):</label>
+                                <input class="form-control" name="addressStreet" type="text" />
+                            </div>
+                        </div>
+                        <!-- Address City Input -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Address (City):</label>
+                                <input class="form-control" name="addressCity" type="text" />
+                            </div>
+                        </div>
+                        <!-- Address Province Input -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Address (Province):</label>
+                                <input class="form-control" name="addressProvince" type="text" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <!-- Fieldset for Academic Information -->
+                <fieldset>
+                    <legend>Academic Information</legend>
+                    <div class="row">
+                        <!-- College Employment (Teaching Assistant) Checkbox -->
+                        <div class="col-md-4">
+                            <label>College Employment:</label><br />
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="TA" name="TA">
+                                <label class="form-check-label" for="TA">
+                                    Teaching Assistant
+                                </label>
+                            </div>
+                            <br />
+                        </div>
+                        <!-- Enrollment Status Radio Buttons -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Enrollment Status:</label><br />
+                                <label class="checkbox-inline">
+                                    <input type="radio" name="status" value="Full Time" /> Full Time
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="radio" name="status" value="Part Time" /> Part Time
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Enrolled Course Dropdown -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="course">Enrolled in Course:</label>
+                                <!-- Check if courses are available -->
+                                {{#if courses}}
+                                <select class="form-control" name="course" id="course">
+                                    <!-- Default option -->
+                                    <option value="">Select Course</option>
+                                    <!-- Iterate through courses and create options -->
+                                    {{#each courses}}
+                                    <option value="{{courseId}}">{{courseCode}}</option>
+                                    {{/each}}
+                                </select>
+                                {{else}}
+                                <!-- Display message if no courses are available -->
+                                <div>No Courses</div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <hr />
+                <!-- Submit Button -->
+                <input type="submit" class="btn btn-primary float-right" value="Add Student" /><br /><br /><br />
+            </form>
+        </main>
+    </div>
+</div>

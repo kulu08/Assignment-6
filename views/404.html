@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Not Found</title>
+    <style>
+        /* Basic styling for the body to center content and add a gradient background */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff4081, #81d4fa);
+            font-family: 'Arial', sans-serif;
+            color: #ffffff;
+        }
+        /* Centered container styling */
+        .container {
+            text-align: center;
+        }
+        /* Styling for the main heading with animation */
+        h1 {
+            font-size: 100px;
+            margin: 0;
+            animation: pulse 1.5s infinite;
+        }
+        /* Styling for the shocked face icon */
+        .shocked-face {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            background: url('/images/shocked-face.png') no-repeat center center;
+            background-size: contain;
+            vertical-align: middle;
+        }
+        /* Styling for the paragraph text */
+        p {
+            font-size: 20px;
+            margin: 30px 0;
+        }
+        /* Styling for the link */
+        a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid #ffffff;
+            border-radius: 25px;
+            transition: background 0.3s, color 0.3s;
+        }
+        /* Hover effect for the link */
+        a:hover {
+            background: #ffffff;
+            color: #ff4081;
+        }
+        /* Keyframes for the pulsing animation */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main heading with a shocked face icon in the middle -->
+        <h1>4<span class="shocked-face"></span>4</h1>
+        <!-- Informational message about the page not being found -->
+        <p>Oops! The page you are looking for does not exist.</p>
+        <!-- Link to return to the homepage -->
+        <p><a href="/">Go back to the homepage</a></p>
+    </div>
+</body>
+</html>

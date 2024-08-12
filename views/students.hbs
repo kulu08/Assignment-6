@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-12">
+        <!-- Spacer -->
+        <br>
+        
+        <!-- Header with a button to add a new student -->
+        <h2>Students
+            <a href="/students/add" class="btn btn-success float-end">Add New Student</a>
+        </h2>
+        <hr />
+
+        <!-- Table to display list of students -->
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <!-- Table headers -->
+                        <th>Student Num</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                        <th>Course ID</th>
+                        <th></th> <!-- Header for the remove button column -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through each student and display their details -->
+                    {{#each students}}
+                    <tr>
+                        <!-- Display student number -->
+                        <td>{{this.studentNum}}</td>
+                        <!-- Display student full name as a link to their profile -->
+                        <td><a href="/student/{{this.studentNum}}">{{this.firstName}} {{this.lastName}}</a></td>
+                        <!-- Display email as a mailto link -->
+                        <td><a href="mailto:{{this.email}}">{{this.email}}</a></td>
+                        <!-- Display full address -->
+                        <td>{{this.addressStreet}}, {{this.addressCity}}, {{this.addressProvince}}</td>
+                        <!-- Display enrollment status -->
+                        <td>{{this.status}}</td>
+                        <!-- Display course ID as a link to filter by course -->
+                        <td><a href="/students?course={{this.course}}">{{this.course}}</a></td>
+                        <!-- Remove button to delete the student -->
+                        <td>
+                            <a href="/student/delete/{{this.studentNum}}" class="btn btn-danger">Remove</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Display a message if no students are available -->
+        {{#unless students.length}}
+        <div class="col-md-12 text-center">
+            <strong>{{message}}</strong>
+        </div>
+        {{/unless}}
+    </div>
+</div>
